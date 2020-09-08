@@ -1,0 +1,18 @@
+//Task 1. Deploy GKE clusters
+gcloud container clusters create standard-cluster-1 \
+    --zone us-central1-a
+    
+//Task 2. Modify GKE clusters
+gcloud container clusters resize standard-cluster-1 --node-pool default-pool \
+    --num-nodes 4 \
+    --zone=us-central1-a
+
+//Task 3. Deploy a sample workload
+1. create the deployment.yaml file (eg nginx-deployment.yaml) and upload to google cloud shell
+2. execute the next command:
+kubectl apply -f ./nginx-deployment.yaml
+
+//Task 4. View details about workloads in the GCP Console
+kubectl describe deployment nginx-1 [this shows details about deployment]
+kubectl describe pods [this shows details about pods]
+

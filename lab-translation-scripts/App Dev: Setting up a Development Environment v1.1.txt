@@ -1,0 +1,19 @@
+//Task 1: Creating a Compute Engine Virtual Machine Instance
+gcloud compute instances create dev-instance --zone=us-central1-a --machine-type=e2-medium --scopes=https://www.googleapis.com/auth/cloud-platform --tags=http-server --image=debian-9-stretch-v20200902 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=dev-instance
+
+gcloud compute firewall-rules create default-allow-http --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80 --source-ranges=0.0.0.0/0 --target-tags=http-server
+
+//Task 2: Install software on the VM instance
+//ssh into newly created vm (dev-instance) and execute the following commands
+a. sudo apt-get update [update the Debian package list with this command]
+b. sudo apt-get install git [install Git]
+c. curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - [download the Node.js setup script]
+d. sudo apt install nodejs [install npm and Node.js]
+
+//Task 3: Configure the VM to Run Application Software
+//excute the following commands
+a. git clone https://github.com/GoogleCloudPlatform/training-data-analyst [clone sample app from repository]
+b. cd ~/training-data-analyst/courses/developingapps/nodejs/devenv/   [change directory to the cloned app directory]
+c. sudo node server/app.js [test-run cloned app,click on the External IP address for the dev-instance to view the running app; exit with ctrl+c from the ssh window if it runs successfully]
+d. npm install [install nodejs library for compute engine]
+e. node list-gce-instances.js [run a simple Node.js application that lists Compute Engine instances]

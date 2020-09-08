@@ -1,0 +1,25 @@
+//Task 1 Sign in to the Google Cloud Platform (GCP) Console
+gcloud auth login
+
+//Task 2: Confirm that needed APIs are enabled
+gcloud services list --available
+	//if some needed apis are not enabled, execute this command to enable them
+	gcloud services enable [NAME]
+
+//Task 3: Start a Kubernetes Engine cluster
+//execute the following commands
+a. export MY_ZONE=us-central1-a [place zone in an environmental variable for convinience]
+b. gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2 [Start a Kubernetes cluster called webfrontend managed by Kubernetes Engine]
+c. kubectl version [check your kubernetes version]
+d. gcloud compute instances list [check if nodes have been successfully created and is running]
+
+//Task 4: Run and deploy a container
+a. kubectl create deploy nginx --image=nginx:1.17.10 [launch a single instance of the nginx container]
+b. kubectl get pods [View the pod running the nginx container]
+c. kubectl expose deployment nginx --port 80 --type LoadBalancer [Expose the nginx container to the Internet]
+d. kubectl get services [View the new service]
+e. kubectl scale deployment nginx --replicas 3 [Scale up the number of pods running on your service]
+f. kubectl get pods [Confirm that Kubernetes has updated the number of pods]
+g. kubectl get services [Confirm that your external IP address has not changed]
+
+
